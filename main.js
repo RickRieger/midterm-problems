@@ -1,14 +1,15 @@
 
-function isEvenlyDivisible(num1, num2) {
-  if(num1%num2 === 0){
-    return true
-  }
-  else{
-    return false
-  }
-}
+// function isEvenlyDivisible(num1, num2) {
+//   if(num1%num2 === 0){
+//     return true
+//   }
+//   else{
+//     return false
+//   }
+// }
 
-
+//ArrowFunction
+const isEvenlyDivisible = (num1, num2) => num1 % num2 === 0;
 
 
 //====================================
@@ -16,13 +17,14 @@ function isEvenlyDivisible(num1, num2) {
 
 
 
-function halfSquare(num) {
-  let result = 0
-  result = (num * num) / 2
-  return result
-}
+// function halfSquare(num) {
+//   let result = 0
+//   result = (num * num) / 2
+//   return result
+// }
 
-
+//ArrowFunction
+const halfSquare = num => (num * num) / 2;
 
 
 //====================================
