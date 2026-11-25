@@ -115,11 +115,19 @@ function exclaim(str) {
 
 
 
+// Count where words START (a non-space at the beginning or right after a space),
+// so an empty string is 0 words and extra spaces don't add phantom words.
 function countWords(str) {
-  let wordsCount = 1
+  let wordsCount = 0
+  let inWord = false
   for (const char of str){
-    if(char === ' ')
-    wordsCount += 1
+    if(char === ' '){
+      inWord = false
+    }
+    else if(!inWord){
+      wordsCount += 1
+      inWord = true
+    }
   }
   return wordsCount
 }
