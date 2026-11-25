@@ -1,89 +1,28 @@
+// Midterm problems (Code Immersives, March 2021)
+//
+// Who wrote what: functions marked "Mine" are my own midterm answers.
+// Functions marked "From the instructor's review lecture" are the
+// instructor's solutions, which I copied in after the lecture
+// (my first attempts at those are described in the README).
 
-// function isEvenlyDivisible(num1, num2) {
-//   if(num1%num2 === 0){
-//     return true
-//   }
-//   else{
-//     return false
-//   }
-// }
+//==================== isEvenlyDivisible (mine) ====================
 
-//ArrowFunction
 const isEvenlyDivisible = (num1, num2) => num1 % num2 === 0;
 
+//==================== halfSquare (mine) ====================
 
-//====================================
+const halfSquare = (num) => (num * num) / 2;
 
+//==================== isLong (mine) ====================
 
+const isLong = (str) => str.length >= 15;
 
+//==================== exclaim (from the instructor's review lecture) ====================
 
-// function halfSquare(num) {
-//   let result = 0
-//   result = (num * num) / 2
-//   return result
-// }
-
-//ArrowFunction
-const halfSquare = num => (num * num) / 2;
-
-
-//====================================
-
-
-
-
-function isLong(str) {
-  if (str.length >= 15){
-    return true
-  }
-  else {
-    return false
-  }
-}
-
-
-
-//====================================
-
-
-
-
-// function exclaim(str) {
-//   let newStr = ''
-//   let numOfexplinationMarks = 0
-//   for (const char of str){
-//     if(char === '!'){
-//       numOfexplinationMarks += 1
-//     }
-//   }
-//   if(numOfexplinationMarks === 0){
-//     for(const char of str){
-//       newStr += char
-//     }
-//     return newStr += '!'
-//   }
-//   else if (numOfexplinationMarks === 1){
-//     return str
-//   }
-//   else if (numOfexplinationMarks > 1){
-//     for(const char of str){
-//       if(char !== '!'){
-//         newStr += char
-//       }
-      
-//     }
-//   }
-//   return newStr += '!'
-// }
-
-
-
-
-
-//AlexCrist Solution
+// Ends the string with exactly one '!'. Only the exclamation marks at the END
+// are touched: 'Hi! there!!' becomes 'Hi! there!'.
 function exclaim(str) {
-
-  // Count the number of exclamation marks that the string ends with (count start at end of string)
+  // Count the exclamation marks the string ends with (start at the end and walk back)
   let numExclamationMarks = 0;
   for (let i = str.length - 1; i >= 0; i--) {
     if (str[i] === '!') {
@@ -93,443 +32,126 @@ function exclaim(str) {
     }
   }
 
-  // Get the part of the string that does not contain the exclamation marks (ie.: 'hello!!!' => 'hello')
+  // Copy everything before those exclamation marks ('hello!!!' => 'hello')
   let exclamationlessStr = '';
   for (let i = 0; i < str.length - numExclamationMarks; i++) {
     exclamationlessStr += str[i];
   }
 
-  // Add one exclamation mark to the end
-  // (i.e.: 'hello' => 'hello!')
+  // Add exactly one back ('hello' => 'hello!')
   return exclamationlessStr + '!';
 }
 
-
-
-
-
-
-
-//====================================
-
-
-
+//==================== countWords (mine) ====================
 
 // Count where words START (a non-space at the beginning or right after a space),
 // so an empty string is 0 words and extra spaces don't add phantom words.
 function countWords(str) {
-  let wordsCount = 0
-  let inWord = false
-  for (const char of str){
-    if(char === ' '){
-      inWord = false
-    }
-    else if(!inWord){
-      wordsCount += 1
-      inWord = true
+  let wordsCount = 0;
+  let inWord = false;
+  for (const char of str) {
+    if (char === ' ') {
+      inWord = false;
+    } else if (!inWord) {
+      wordsCount++;
+      inWord = true;
     }
   }
-  return wordsCount
+  return wordsCount;
 }
 
-//====================================
+//==================== containsDigit (mine) ====================
 
-
-
-function containsDigit(str){
-  let count = 0
-  for (const char of str){
-    if (char === '1'||
-    char === '2'||
-    char === '3'||
-    char === '4'||
-    char === '5'||
-    char === '6'||
-    char === '7'||
-    char === '8'||
-    char === '9'||
-    char === '0'){
-      count += 1  
-    } 
+function containsDigit(str) {
+  const digitChars = '0123456789';
+  for (const char of str) {
+    if (digitChars.includes(char)) {
+      return true; // one is enough, no need to keep looking
+    }
   }
-  if(count > 0){
-    return true
-  }
-  else{
-    return false
-  }
+  return false;
 }
 
-// //AlexCrist
-// function containsDigit(str) {
-//   let doesContainDigits = false;
+//==================== containsLowerCase (from the instructor's review lecture) ====================
 
-//   // Look at every character, and see if any of them are digits
-//   for (const char of str) {
-//     if (
-//       char === '0' ||
-//       char === '1' ||
-//       char === '2' ||
-//       char === '3' ||
-//       char === '4' ||
-//       char === '5' ||
-//       char === '6' ||
-//       char === '7' ||
-//       char === '8' ||
-//       char === '9'
-//     ) {
-//       doesContainDigits = true;
-//     }
-//   }
-
-//   return doesContainDigits;
-// }
-
-////my feeble attempt
-// function containsLowerCase(str) {
-//   let numSymCount = 0
-//   let upperCount = 0
-//   let lowerCount = 0
-//   for(const char of str){
-//     if (char.toLowerCase() === char.toUpperCase()){
-//       numSymCount += 1
-//     }
-    
-//     else if(char !== char.toLowerCase()){
-//       upperCount += 1
-//     }
-     
-//     else if(char !== char.toUpperCase()){
-//       lowerCount += 1
-//     }
-//   }
-//   if(upperCount === str.length || numSymCount === str.length){
-//     return false;
-//   }
-//   else{
-//     return true;
-//   }
-// }
-
-
-
-
-
-//AlexCrist
 function containsLowerCase(str) {
-  let doesContainLowerCase = false;
-
-  const lowerCaseDigits = 'abcdefghijklmnopqrstuvwxyz';
-
+  const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
   for (const char of str) {
-    if (lowerCaseDigits.includes(char)) {
-      doesContainLowerCase = true;
+    if (lowerCaseLetters.includes(char)) {
+      return true;
     }
   }
-
-  return doesContainLowerCase;
+  return false;
 }
 
+//==================== containsUpperCase (from the instructor's review lecture) ====================
 
-
-
-// //INTERESTING SOLUTION by AlexCrist
-// function containsLowerCase(str) {
-
-//   let doesContainLowerCase = false;
-
-//   for (const char of str) {
-
-//     // 1. Is the char a letter?
-//     const isLetter = char.toLowerCase() !== char.toUpperCase();
-
-//     // 2. If so, is the lowercased version of that char equal to the original char
-//     const isLowerCase = char === char.toLowerCase();
-    
-//     // If 1. and 2. are both true, char is a lower case letter
-//     if (isLetter && isLowerCase) {
-//       doesContainLowerCase = true;
-//     }
-//   }
-
-//   return doesContainLowerCase;
-
-// }
-
-
-
-//===================================================
-
-
-
-////my feeble attempt
-// function containsUpperCase(str) {
-//   let numSymCount = 0
-//   let upperCount = 0
-//   let lowerCount = 0
-//   for(const char of str){
-//     if (char.toLowerCase() === char.toUpperCase()){
-//       numSymCount += 1
-//     }
-//     else if(char !== char.toLowerCase()){
-//       upperCount += 1
-//     }
-//     else if(char !== char.toUpperCase()){
-//       lowerCount += 1
-//     }
-//   }
-//   if(lowerCount === str.length || numSymCount === str.length ){
-//     return false;
-//   }
-//   else{
-//     return true;
-//   }
-// }
-
-//AlexCrist
 function containsUpperCase(str) {
-  let doesContainUpperCase = false;
-
-  const upperCaseDigits = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
+  const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   for (const char of str) {
-    if (upperCaseDigits.includes(char)) {
-      doesContainUpperCase = true;
+    if (upperCaseLetters.includes(char)) {
+      return true;
     }
   }
-
-  return doesContainUpperCase;
+  return false;
 }
 
+//==================== containsNonAlphanumeric (from the instructor's review lecture) ====================
 
-
-//=========================================================
-
-
-
-
-// function containsNonAlphanumeric(str) {
-//   let numSymCount = 0
-//   let upperCount = 0
-//   let lowerCount = 0
-//   for(const char of str){
-//     if (char.toLowerCase() === char.toUpperCase()){
-//       numSymCount += 1
-//     }
-//     else if (parseInt(char) === str.length()){
-//       return false
-//     }
-//     else if(numSymCount > 0){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   }
-// }
-
-
+// Reuses the three functions above on one character at a time.
 function containsNonAlphanumeric(str) {
-  let doesContainNonAlphanumeric = false;
-
   for (const char of str) {
-    const isDigit = containsDigit(char);
-    const isUpperCaseLetter = containsUpperCase(char);
-    const isLowerCaseLetter = containsLowerCase(char);
-    const isAlphanumeric = (
-      isDigit || 
-      isUpperCaseLetter || 
-      isLowerCaseLetter
-    );
+    const isAlphanumeric = containsDigit(char) || containsUpperCase(char) || containsLowerCase(char);
     if (!isAlphanumeric) {
-      doesContainNonAlphanumeric = true;
+      return true;
     }
   }
-
-  return doesContainNonAlphanumeric;
+  return false;
 }
 
+//==================== containsSpace (mine) ====================
 
-//=====================================================
-
-
-
-
-// function containsSpace(str) {
-//   let spaceCount = 0
-//   for (const char of str){
-//     if (char === ' '){
-//       spaceCount += 1
-//     }
-//   }
-//   if (spaceCount > 0){
-//     return true
-//   }
-//   else{
-//     return false
-//   }
-// }
-
-function containsSpace(str){
-  let doesContainSpace = false
-  if (str === ''){
-    return doesContainSpace
-  }
-  for (const char of str){
-    if (char === ' '){
-      doesContainSpace = true
+function containsSpace(str) {
+  for (const char of str) {
+    if (char === ' ') {
+      return true;
     }
   }
-  return doesContainSpace
+  return false;
 }
 
+//==================== digits (mine) ====================
 
-
-
-//=====================================================
-
-
-
-
-
-function digits(nums) {
-  let newStr = nums.toString()
-  let newArray = []
-  let newNum = 0
-  for (const char of newStr){
-    if(char !== '-' && char !== '.'){
-      newNum = parseInt(char)
-      newArray.push(newNum)
+// 12.5 => '12.5' => [1, 2, 5]: skip the minus sign and the decimal point.
+function digits(num) {
+  const result = [];
+  for (const char of num.toString()) {
+    if (char !== '-' && char !== '.') {
+      result.push(parseInt(char));
     }
   }
-  return newArray
+  return result;
 }
-// function digits(num) {
-//   let newStr = num.toString()
-//   let result = []
-//   for (const char of newStr){
-//     if(char !== '-' && char !== '.'){
-//       result.push(parseInt(char))
-//     }
-//   }
-//   return result
-// }
 
+//==================== truncate (mine) ====================
 
-
-
-//=============================================================
-
-
-
-
-
+// 15 characters or more: keep the first 8 and add '...'.
 function truncate(str) {
-  let newStr = ''
-  if (str.length > 15){
-    for (let i = 0; i <= 7; i++){
-      newStr += `${str[i]}`
-    }
+  if (str.length < 15) {
+    return str;
   }
-  else if (str.length === 15){
-    for (let i = 0; i <= 7; i++){
-      newStr += `${str[i]}`
-    }
+  let newStr = '';
+  for (let i = 0; i < 8; i++) {
+    newStr += str[i];
   }
-  else if(str.length < 15){
-    return str
-  }
-  return newStr += '...'
+  return newStr + '...';
 }
 
-////AlexCrist solution
-// function truncate(str) {
-//   // If string is less than 15 characters, return it unchanged
-//   if (str.length < 15) {
-//     return str;
-//   }
+//==================== isValidPassword (from the instructor's review lecture) ====================
 
-//   // If equal to or longer than 15 chars, truncate it to the first 8 characters + '...'
-//   else {
-//     let output = '';
-//     for (let i = 0; i < 8; i++) {
-//       output += str[i];
-//     }
-//     output += '...';
-//     return output;
-//   }
-// }
-
-//===========================================================================================
-
-
-
-
-
-
-////my feeble attempt
-// function isValidPassword(str) {
-//   let lowerCount = 0
-//   let upperCount = 0
-//   let numCount = 0
-//   let specCharCount = 0
-//   let spaceCount = 0
-//   for (const char in str) {
-//     if (!isNaN(parseInt(str[char]))) {
-//       numCount++;
-//     }
-//     else if (char !== char.toUpperCase()){
-//       lowerCount++;
-//     }
-//     else if (char !== char.toLowerCase()){
-//       upperCount++;
-//     }
-//     else if (char.toUpperCase() === char.toLowerCase() && !isNaN(parseInt(str[char]))){
-//       specCharCount++;
-//     }
-//     else if (char === ' '){
-//       spaceCount++;
-//     }
-//   }
-//     if (numCount>0 && lowerCount>0 && upperCount>0 && specCharCount>0){
-//       return true
-//     }
-//     else {
-//       return false
-//     } 
-// }
-
-// Valid passwords have:
-// * at least one upper case char
-// * at least one lower case char
-// * at least one digit
-// * at least one non-alphanumeric char
-// * no spaces
-
-
-//AlexCrist solution
-
-// function isValidPassword(str) {
-//   const doesContainUpperCase = containsUpperCase(str);
-//   const doesContainLowerCase = containsLowerCase(str);
-//   const doesContainDigit = containsDigit(str);
-//   const doesContainNonAlphanumeric = containsNonAlphanumeric(str);
-//   const doesContainSpace = containsSpace(str);
-  
-//   const isValid = (
-//     doesContainUpperCase &&
-//     doesContainLowerCase &&
-//     doesContainDigit &&
-//     doesContainNonAlphanumeric &&
-//     !doesContainSpace
-//   );
-
-//   return isValid;
-// }
-
-
-//shorter version of the above code
-
+// Valid passwords have at least one upper case letter, one lower case letter,
+// one digit and one non-alphanumeric character, and no spaces.
+// Each rule is one of the functions above.
 function isValidPassword(str) {
   return (
     containsUpperCase(str) &&
@@ -540,57 +162,24 @@ function isValidPassword(str) {
   );
 }
 
+//==================== onlyPunchy (from the instructor's review lecture) ====================
 
-
-
-
-//==========================================================
-
-
-
-
-
-
+// exclaim every title, then keep the ones under 15 characters.
+// (With array methods this is: titles.map(exclaim).filter((title) => title.length < 15))
 function onlyPunchy(titles) {
-
-  // Apply the `exclaim` function to each item in the input array
-  let exclaimedTitles = [];
+  const exclaimedTitles = [];
   for (const title of titles) {
-    const exclaimedTitle = exclaim(title);
-    exclaimedTitles.push(exclaimedTitle);
+    exclaimedTitles.push(exclaim(title));
   }
 
-  // Filter out any titles that are >= 15 chars
-  let punchyTitles = [];
+  const punchyTitles = [];
   for (const title of exclaimedTitles) {
     if (title.length < 15) {
-      punchyTitles.push(title); 
+      punchyTitles.push(title);
     }
   }
-
   return punchyTitles;
 }
-
-// .map, .filter version
-
-
-
-function onlyPunchyAlternate(titles) {
-  const exclaimedTitles = titles.map(exclaim);
-  const punchyTitles = exclaimedTitles.filter(
-  (title) => title.length < 15
-  );
-  return punchyTitles;
-}
-
-
-
-
-//======================================================================
-
-
-
-
 
 module.exports = {
   isEvenlyDivisible,
@@ -607,4 +196,4 @@ module.exports = {
   truncate,
   isValidPassword,
   onlyPunchy,
-}
+};
