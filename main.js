@@ -371,7 +371,7 @@ function containsNonAlphanumeric(str) {
 // }
 
 function containsSpace(str){
-  doesContainSpace = false
+  let doesContainSpace = false
   if (str === ''){
     return doesContainSpace
   }
@@ -427,12 +427,12 @@ function digits(nums) {
 function truncate(str) {
   let newStr = ''
   if (str.length > 15){
-    for (i=0;i<=7;i++){
+    for (let i = 0; i <= 7; i++){
       newStr += `${str[i]}`
     }
   }
   else if (str.length === 15){
-    for (i=0;i<=7;i++){
+    for (let i = 0; i <= 7; i++){
       newStr += `${str[i]}`
     }
   }
